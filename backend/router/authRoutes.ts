@@ -18,6 +18,11 @@ router.post(
 router.post('/login', [
   check('email', 'Incorrect email').normalizeEmail().isEmail(),
   check('password', 'Incorrect password').exists()
-])
+],
+  authController.login
+)
 
-module.exports = router
+router.post('/logout', authController.logout)
+router.get('/refresh', authController.refresh)
+
+export default router

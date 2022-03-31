@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const User_1 = __importDefault(require("../models/User"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const tokenService_1 = __importDefault(require("./tokenService"));
+const userDto_1 = __importDefault(require("../dtos/userDto"));
 class AuthService {
     registerUser(data) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -22,9 +24,10 @@ class AuthService {
                 email: data.email,
                 password: hashedPassword
             });
-            return {
-                userId: user._id
-            };
+            const userDto = new userDto_1.default(user);
+            const tokens = tokenService_1.default.generateTokens(Object.assign({}, userDto));
+            yield tokenService_1.default.saveToken(user._id, tokens.refreshToken);
+            return Object.assign(Object.assign({}, tokens), { userId: user._id });
         });
     }
     checkUserUnique(email) {

@@ -8,21 +8,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
-const mongoose = require('mongoose');
-const express = require('express');
-const cors = require('cors');
-const router = require('./router/index');
+const mongoose_1 = __importDefault(require("mongoose"));
+const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const authRoutes_1 = __importDefault(require("./router/authRoutes"));
 const PORT = process.env.PORT || 5000;
-const app = express();
-app.use(express.json());
-app.use(cors());
-app.use('/api', router);
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use((0, cookie_parser_1.default)());
+app.use((0, cors_1.default)());
+app.use('/api', authRoutes_1.default);
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield mongoose.connect(process.env.DB_URI, {
-            useUnifiedTopology: true
-        });
+        yield mongoose_1.default.connect(String(process.env.DB_URI));
         app.listen(PORT, () => console.log(`Server has been started on port ${PORT}`));
     }
     catch (e) {

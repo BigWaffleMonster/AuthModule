@@ -28,10 +28,35 @@ class AuthController {
                     return next('User with such email already exists');
                 }
                 const userData = yield authService_1.default.registerUser(data);
+                res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
                 return res.status(201).json(userData);
             }
             catch (e) {
                 console.log(e);
+            }
+        });
+    }
+    login(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+            }
+            catch (e) {
+            }
+        });
+    }
+    logout(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+            }
+            catch (e) {
+            }
+        });
+    }
+    refresh(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+            }
+            catch (e) {
             }
         });
     }

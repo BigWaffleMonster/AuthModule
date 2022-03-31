@@ -1,21 +1,21 @@
 require('dotenv').config()
-const mongoose = require('mongoose')
-const express = require('express')
-const cors = require('cors')
-const router = require('./router/index')
+import mongoose from 'mongoose'
+import express from 'express'
+import cors from 'cors'
+import cookieParser from 'cookie-parser'
+import authRouter from './router/authRoutes'
 
 const PORT = process.env.PORT || 5000
 const app = express()
 
 app.use(express.json())
+app.use(cookieParser())
 app.use(cors())
-app.use('/api', router)
+app.use('/api', authRouter)
 
 const start = async () => {
   try {
-    await mongoose.connect(process.env.DB_URI, {
-      useUnifiedTopology: true
-    })
+    await mongoose.connect(String(process.env.DB_URI))
     app.listen(PORT, () =>
       console.log(`Server has been started on port ${PORT}`)
     )
