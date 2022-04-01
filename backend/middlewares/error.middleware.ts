@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 
-import ApiError from '../exceptions/apiError'
+import ApiError from '../exceptions/api.error'
 
 export default function (
   err: any,

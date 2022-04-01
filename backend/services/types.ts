@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-export type UserRegisterDataType = {
+export type UserInputDataType = {
   email: string
   password: string
 }
