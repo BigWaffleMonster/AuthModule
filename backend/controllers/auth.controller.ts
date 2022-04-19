@@ -21,7 +21,7 @@ class AuthController {
         httpOnly: true
       })
 
-      return res.status(201).json(userData)
+      return res.status(200).json(userData)
     } catch (e) {
       next(e)
     }
@@ -43,7 +43,7 @@ class AuthController {
         httpOnly: true
       })
 
-      return res.status(201).json(userData)
+      return res.status(200).json(userData)
     } catch (e) {
       next(e)
     }
@@ -72,7 +72,7 @@ class AuthController {
         httpOnly: true
       })
 
-      return res.status(201).json(userData)
+      return res.status(200).json(userData)
     } catch (e) {
       next(e)
     }
